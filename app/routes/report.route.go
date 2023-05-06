@@ -2,6 +2,7 @@ package routes
 
 import (
 	"github.com/devmeireles/go-vue-image-evaluate/app/controllers"
+	_ "github.com/devmeireles/go-vue-image-evaluate/app/docs"
 	"github.com/gofiber/fiber/v2"
 )
 

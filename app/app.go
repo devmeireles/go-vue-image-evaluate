@@ -10,6 +10,7 @@ import (
 func setupRoutes() {
 	app := fiber.New()
 	routes.ReportRoutes(app)
+	routes.DocsRoutes(app)
 	app.Listen(":3000")
 }
 

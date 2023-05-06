@@ -1,0 +1,48 @@
+definitions:
+  models.Report:
+    properties:
+      description:
+        type: string
+      name:
+        description: gorm.Model
+        type: string
+      status:
+        type: integer
+    required:
+    - name
+    type: object
+host: localhost:3000
+info:
+  contact: {}
+  description: A quickly API setup to evaulate avatar.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Image Evaluate API
+  version: "1.0"
+paths:
+  /report:
+    post:
+      consumes:
+      - application/json
+      description: Saves a request for avatar evaluate
+      parameters:
+      - description: Create a report
+        in: body
+        name: evaluate
+        required: true
+        schema:
+          $ref: '#/definitions/models.Report'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Report'
+            type: array
+      summary: Endpoint to saves avatar reports
+      tags:
+      - report
+swagger: "2.0"
