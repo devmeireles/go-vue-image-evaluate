@@ -7,6 +7,15 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// CreateReport godoc
+// @Summary Endpoint to saves avatar reports
+// @Description Saves a request for avatar evaluate
+// @Tags report
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} models.Report
+// @Param evaluate body models.Report true "Create a report"
+// @Router /report [post]
 func CreateReport(c *fiber.Ctx) error {
 	data := new(models.Report)
 
