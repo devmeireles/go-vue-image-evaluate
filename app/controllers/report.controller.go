@@ -4,7 +4,7 @@ import (
 	"errors"
 	"strconv"
 
-	"github.com/devmeireles/go-vue-image-evaluate/app/models"
+	"github.com/devmeireles/go-vue-image-evaluate/app/dto"
 	"github.com/devmeireles/go-vue-image-evaluate/app/services"
 	"github.com/devmeireles/go-vue-image-evaluate/app/utils"
 	"github.com/gofiber/fiber/v2"
@@ -18,10 +18,10 @@ import (
 // @Accept  json
 // @Produce  json
 // @Success 200 {array} models.Report
-// @Param evaluate body models.Report true "Create a report"
+// @Param evaluate body dto.CreateReportDTO true "Create a report"
 // @Router /report [post]
 func CreateReport(c *fiber.Ctx) error {
-	data := new(models.Report)
+	data := new(dto.CreateReportDTO)
 
 	c.BodyParser(data)
 

@@ -1,4 +1,14 @@
 definitions:
+  dto.CreateReportDTO:
+    properties:
+      report_id:
+        type: string
+      url:
+        type: string
+    required:
+    - report_id
+    - url
+    type: object
   models.Report:
     properties:
       created_at:
@@ -52,7 +62,7 @@ paths:
         name: evaluate
         required: true
         schema:
-          $ref: '#/definitions/models.Report'
+          $ref: '#/definitions/dto.CreateReportDTO'
       produces:
       - application/json
       responses:

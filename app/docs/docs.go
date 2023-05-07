@@ -64,7 +64,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Report"
+                            "$ref": "#/definitions/dto.CreateReportDTO"
                         }
                     }
                 ],
@@ -115,6 +115,21 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "dto.CreateReportDTO": {
+            "type": "object",
+            "required": [
+                "report_id",
+                "url"
+            ],
+            "properties": {
+                "report_id": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
         "models.Report": {
             "type": "object",
             "required": [
