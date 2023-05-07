@@ -7,6 +7,7 @@ import (
 
 	"github.com/devmeireles/go-vue-image-evaluate/app/models"
 	"github.com/joho/godotenv"
+	uuid "github.com/satori/go.uuid"
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -58,6 +59,16 @@ func ConnectDb() {
 	db.AutoMigrate(
 		models.Report{},
 	)
+
+	db.Callback().Create().Before("gorm:create").Register("generate_uuid", func(tx *gorm.DB) {
+		if tx.Statement.Schema != nil {
+			if field, ok := tx.Statement.Schema.FieldsByName["ID"]; ok {
+				if _, ok := field.TagSettings["primary_key"]; ok {
+					tx.Statement.SetColumn("ID", uuid.NewV4())
+				}
+			}
+		}
+	})
 
 	DB = Dbinstance{
 		Db: db,
