@@ -21,6 +21,30 @@ const docTemplate = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/report": {
+            "get": {
+                "description": "List all reports",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "report"
+                ],
+                "summary": "Get a list of reports id",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Report"
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "description": "Saves a request for avatar evaluate",
                 "consumes": [
@@ -32,7 +56,7 @@ const docTemplate = `{
                 "tags": [
                     "report"
                 ],
-                "summary": "Endpoint to saves avatar reports",
+                "summary": "Endpoint to save avatar reports",
                 "parameters": [
                     {
                         "description": "Create a report",
@@ -40,7 +64,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Report"
+                            "$ref": "#/definitions/dto.CreateReportDTO"
                         }
                     }
                 ],
@@ -56,24 +80,77 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/report/{id}": {
+            "get": {
+                "description": "Get details of report corresponding to the input id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "report"
+                ],
+                "summary": "Get details for a given report id",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Report ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Report"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "dto.CreateReportDTO": {
+            "type": "object",
+            "required": [
+                "report_id",
+                "url"
+            ],
+            "properties": {
+                "report_id": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
         "models.Report": {
             "type": "object",
             "required": [
-                "name"
+                "report_id",
+                "url"
             ],
             "properties": {
-                "description": {
+                "created_at": {
                     "type": "string"
                 },
-                "name": {
-                    "description": "gorm.Model",
+                "id": {
+                    "type": "string"
+                },
+                "report_id": {
                     "type": "string"
                 },
                 "status": {
                     "type": "integer"
+                },
+                "url": {
+                    "type": "string"
                 }
             }
         }

@@ -1,8 +1,16 @@
 package models
 
+import (
+	"time"
+
+	uuid "github.com/satori/go.uuid"
+)
+
 type Report struct {
-	// gorm.Model
-	Name        string `json:"name" gorm:"text; not null; default:null" validate:"required"`
-	Description string `json:"description" gorm:"text; not null; default:null"`
-	Status      int    `json:"status" gorm:"int; not null; default: 1"`
+	ID uuid.UUID `gorm:"type:uuid;primary_key;"`
+
+	ReportID  string    `json:"report_id" gorm:"text; not null;" validate:"required"`
+	Url       string    `json:"url" gorm:"text; not null;" validate:"required"`
+	Status    int       `json:"status" gorm:"int; not null; default: 1"`
+	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime:true"`
 }

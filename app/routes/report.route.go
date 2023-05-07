@@ -9,4 +9,6 @@ import (
 func ReportRoutes(app *fiber.App) {
 	report := app.Group("/report")
 	report.Post("/", controllers.CreateReport)
+	report.Get("/", controllers.ListReports)
+	report.Get("/:id", controllers.GetReport)
 }
