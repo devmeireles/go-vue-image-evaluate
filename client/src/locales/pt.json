@@ -1,0 +1,15 @@
+{
+  "core": {
+    "dashboard": "Dashboard",
+    "report": "Report",
+    "settings": "Configurações",
+    "account": "Conta",
+    "logout": "Sair"
+  },
+  "actions": {
+    "open": "Abrir",
+    "close": "Fechar",
+    "create": "Criar",
+    "list": "Listar"
+  }
+}
