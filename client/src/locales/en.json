@@ -1,0 +1,15 @@
+{
+  "core": {
+    "dashboard": "Dashboard",
+    "report": "Report",
+    "settings": "Settings",
+    "account": "Account",
+    "logout": "Logout"
+  },
+  "actions": {
+    "open": "Open",
+    "close": "Close",
+    "create": "Create",
+    "list": "List"
+  }
+}
