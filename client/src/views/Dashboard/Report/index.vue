@@ -1,11 +1,16 @@
 <template>
-  <h1>report</h1>
+  <CustomCard :title="$t('report.title_plural')">
+    <ReportsList />
+  </CustomCard>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+import CustomCard from "@/components/organisms/CustomCard.vue";
+import ReportsList from "@/components/organisms/ReportsList.vue";
+import { defineComponent } from "vue";
 
-  export default defineComponent({
-    name: "ListReport"
-  });
+export default defineComponent({
+  name: "ListReport",
+  components: { CustomCard, ReportsList }
+});
 </script>

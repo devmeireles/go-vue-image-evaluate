@@ -10,6 +10,13 @@
     "open": "Abrir",
     "close": "Fechar",
     "create": "Criar",
-    "list": "Listar"
+    "list": "Listar",
+    "save": "Salvar"
+  },
+  "report": {
+    "title": "Report",
+    "title_plural": "Reports",
+    "external_id": "ID Externo",
+    "image_url": "URL da Imagem"
   }
 }
