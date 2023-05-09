@@ -1,7 +1,22 @@
 <template>
   <div>
     <v-card elevation="0" class="custom-card">
-      <v-card-title class="title mx-5">{{ title }}</v-card-title>
+      <v-card-title class="title pt-7 mx-5 d-flex justify-space-between">
+        <div>{{ title }}</div>
+        <div v-if="createRoute">
+          <v-btn
+            color="success"
+            variant="outlined"
+            :onclick="() => $router.push(createRoute)"
+          >
+            {{ $t('actions.create') }}
+            <v-icon
+              end
+              icon="mdi-plus"
+            ></v-icon>
+          </v-btn>
+        </div>
+      </v-card-title>
       <div class="body pt-5 px-5">
         <slot />
       </div>
@@ -18,6 +33,10 @@ export default defineComponent({
     title: {
       type: String,
       default: null
+    },
+    createRoute: {
+      type: String,
+      default: null,
     }
   }
 });

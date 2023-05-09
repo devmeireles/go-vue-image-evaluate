@@ -11,12 +11,17 @@
     "close": "Fechar",
     "create": "Criar",
     "list": "Listar",
-    "save": "Salvar"
+    "save": "Salvar",
+    "evaluate": "Avaliar"
   },
   "report": {
     "title": "Report",
     "title_plural": "Reports",
     "external_id": "ID Externo",
-    "image_url": "URL da Imagem"
+    "image_url": "URL da Imagem",
+    "waiting": "Aguardando",
+    "status": "Status",
+    "actions": "Ações",
+    "priority": "Prioridade"
   }
 }

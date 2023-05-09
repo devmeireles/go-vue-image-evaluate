@@ -1,16 +1,24 @@
 <template>
-  <CustomCard :title="$t('report.title_plural')">
-    <ReportsList />
+  <CustomCard :title="$t('report.title_plural')" :createRoute="createRoute">
+    <ReportsList :data="reports" />
   </CustomCard>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import CustomCard from "@/components/organisms/CustomCard.vue";
 import ReportsList from "@/components/organisms/ReportsList.vue";
-import { defineComponent } from "vue";
+import { routes } from "@/consts/routes";
+import { useReportStore } from "@/stores/report";
+import { computed, onMounted } from "vue";
 
-export default defineComponent({
-  name: "ListReport",
-  components: { CustomCard, ReportsList }
+const createRoute = routes.report.create;
+const reportStore = useReportStore();
+
+onMounted(() => {
+  reportStore.fetchReports();
+});
+
+const reports = computed(() => {
+  return reportStore.getReports();
 });
 </script>

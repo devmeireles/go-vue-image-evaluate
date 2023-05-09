@@ -16,6 +16,7 @@
     "@mdi/font": "5.9.55",
     "@vuelidate/core": "^2.0.2",
     "@vuelidate/validators": "^2.0.2",
+    "axios": "^1.4.0",
     "pinia": "^2.0.14",
     "pinia-plugin-persistedstate": "^3.1.0",
     "roboto-fontface": "*",

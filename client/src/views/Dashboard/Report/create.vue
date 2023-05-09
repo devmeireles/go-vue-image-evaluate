@@ -5,10 +5,9 @@
         <v-row>
           <v-col cols="6" md="6">
             <v-text-field
-              v-model="externalID"
-              :counter="10"
+              v-model="formData.externalID"
               :label="$t('report.external_id')"
-              :error-messages="v$.externalID.$errors.map(e => e.$message)"
+              :error-messages="v$.formData.externalID.$errors.map(e => e.$message)"
               variant="outlined"
               shaped
               required
@@ -17,10 +16,9 @@
 
           <v-col cols="6" md="6">
             <v-text-field
-              v-model="imageURL"
-              :counter="10"
+              v-model="formData.imageURL"
               :label="$t('report.image_url')"
-              :error-messages="v$.imageURL.$errors.map(e => e.$message)"
+              :error-messages="v$.formData.imageURL.$errors.map(e => e.$message)"
               variant="outlined"
               shaped
               required
@@ -52,6 +50,7 @@
 
 <script lang="ts">
 import CustomCard from "@/components/organisms/CustomCard.vue";
+import { useReportStore, type Report } from "@/stores/report";
 import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { defineComponent } from "vue";
@@ -61,17 +60,22 @@ export default defineComponent({
   data: () => ({
     v$: useVuelidate(),
     isLoading: false,
-    externalID: "",
-    imageURL: "",
+    formData: {
+      externalID: "",
+      imageURL: "",
+    }
   }),
   components: { CustomCard },
   methods: {
     async submitForm() {
+      const reportStore = useReportStore();
+
       this.isLoading = true;
       await this.v$.$validate();
 
       if (!this.v$.$error) {
-        console.log('submit');
+        const data = this.formData as unknown as Report;
+        reportStore.saveReport(data);
       }
 
 
@@ -80,8 +84,10 @@ export default defineComponent({
   },
   validations() {
     return {
-      externalID: { required },
-      imageURL: { required },
+      formData: {
+        externalID: { required },
+        imageURL: { required },
+      }
     }
   }
 });
