@@ -118,14 +118,14 @@ const docTemplate = `{
         "dto.CreateReportDTO": {
             "type": "object",
             "required": [
-                "report_id",
-                "url"
+                "external_id",
+                "image_url"
             ],
             "properties": {
-                "report_id": {
+                "external_id": {
                     "type": "string"
                 },
-                "url": {
+                "image_url": {
                     "type": "string"
                 }
             }
@@ -133,24 +133,27 @@ const docTemplate = `{
         "models.Report": {
             "type": "object",
             "required": [
-                "report_id",
-                "url"
+                "external_id",
+                "image_url"
             ],
             "properties": {
                 "created_at": {
                     "type": "string"
                 },
+                "external_id": {
+                    "type": "string"
+                },
                 "id": {
                     "type": "string"
                 },
-                "report_id": {
+                "image_url": {
                     "type": "string"
+                },
+                "priority": {
+                    "type": "integer"
                 },
                 "status": {
                     "type": "integer"
-                },
-                "url": {
-                    "type": "string"
                 }
             }
         }

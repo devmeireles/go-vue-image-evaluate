@@ -9,8 +9,9 @@ import (
 
 func SaveReport(report *dto.CreateReportDTO) (*models.Report, error) {
 	newReport := &models.Report{
-		ID:  uuid.NewV4(),
-		Url: report.Url,
+		ID:         uuid.NewV4(),
+		ImageUrl:   report.ImageUrl,
+		ExternalID: report.ExternalID,
 	}
 
 	if err := database.DB.Db.Model(&models.Report{}).Create(newReport).Error; err != nil {
