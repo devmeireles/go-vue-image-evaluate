@@ -1,6 +1,6 @@
 package dto
 
 type CreateReportDTO struct {
-	ReportID string `json:"report_id" gorm:"text; not null;" validate:"required"`
-	Url      string `json:"url" gorm:"text; not null;" validate:"required"`
+	ExternalID string `json:"external_id" gorm:"text; not null;" validate:"required"`
+	ImageUrl   string `json:"image_url" gorm:"text; not null;" validate:"required"`
 }
