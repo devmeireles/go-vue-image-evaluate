@@ -48,7 +48,9 @@ export const useReportStore = defineStore({
 
         const { data, status } = response;
 
-        console.log(response);
+        if (status === 201 && data.success) {
+          return data.data;
+        }
       } catch (error) {
         console.log(error);
       }

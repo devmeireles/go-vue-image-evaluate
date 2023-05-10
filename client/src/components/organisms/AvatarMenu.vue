@@ -28,9 +28,9 @@
           active-color="primary"
         >
           <RouterLink :to="`${item.route}`" class="menu-link">
-            <v-list-item-avatar start>
+            <v-list-item start>
               <v-icon :icon="item.icon"></v-icon>
-            </v-list-item-avatar>
+            </v-list-item>
             <v-list-item-title>{{ $t(item.name) }}</v-list-item-title>
           </RouterLink>
         </v-list-item>

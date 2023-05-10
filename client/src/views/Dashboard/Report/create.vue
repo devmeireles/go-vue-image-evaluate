@@ -50,6 +50,8 @@
 
 <script lang="ts">
 import CustomCard from "@/components/organisms/CustomCard.vue";
+import { routes } from "@/consts/routes";
+import { useCoreStore } from "@/stores/core";
 import { useReportStore, type Report } from "@/stores/report";
 import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
@@ -68,16 +70,27 @@ export default defineComponent({
   components: { CustomCard },
   methods: {
     async submitForm() {
-      const reportStore = useReportStore();
-
       this.isLoading = true;
+      const reportStore = useReportStore();
+      const coreStore = useCoreStore();
       await this.v$.$validate();
 
       if (!this.v$.$error) {
         const data = this.formData as unknown as Report;
-        reportStore.saveReport(data);
-      }
+        try {
+          const savedData = await reportStore.saveReport(data);
 
+          console.table(savedData);
+
+          if (savedData) {
+            coreStore.openSnackbar(`${savedData.external_id} created sucessfuly`)
+            this.$router.push(routes.report.main);
+          }
+
+        } catch (error) {
+          console.log(error)
+        }
+      }
 
       this.isLoading = false;
     }
