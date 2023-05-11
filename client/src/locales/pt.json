@@ -12,6 +12,7 @@
     "create": "Criar",
     "list": "Listar",
     "save": "Salvar",
+    "update": "Atualizar",
     "evaluate": "Avaliar"
   },
   "report": {
@@ -22,6 +23,12 @@
     "waiting": "Aguardando",
     "status": "Status",
     "actions": "Ações",
-    "priority": "Prioridade"
+    "priority": "Prioridade",
+    "created": "Criado",
+    "reviewing": "Revisando",
+    "reviewed": "Revisado",
+    "low": "Baixo",
+    "medium": "Médio",
+    "high": "Alto"
   }
 }

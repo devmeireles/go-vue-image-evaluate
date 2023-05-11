@@ -6,6 +6,7 @@ export const routes = {
   },
   report: {
     main: `${MAIN_ROUTE}/report`,
-    create: `${MAIN_ROUTE}/report/create`
+    create: `${MAIN_ROUTE}/report/create`,
+    evaluate: `${MAIN_ROUTE}/report/evaluate`
   }
 };

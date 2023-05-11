@@ -26,14 +26,19 @@
       >
         <td>{{ item.external_id }}</td>
         <td class="image-url">{{ item.image_url }}</td>
-        <td><v-chip color="warning" :text="$t('report.waiting')"></v-chip></td>
-        <td><v-chip color="warning" :text="$t('report.waiting')"></v-chip></td>
+        <td><report-status-chip item-type="status" :status="item.status"/></td>
+        <td><report-status-chip item-type="priority" :status="item.priority"/></td>
         <td>
           <v-btn
             color="primary"
             variant="outlined"
             class="cta-btn"
-            @click=""
+            @click="() => $router.push({
+              name: 'report-evaluate',
+              params: {
+                id: item.id
+              }
+            })"
           >
             {{ $t('actions.evaluate') }}
             <v-icon
@@ -48,14 +53,21 @@
 </template>
 
 <script lang="ts">
+import ReportStatusChip from '@/components/atoms/ReportStatusChip.vue';
+import { routes } from '@/consts/routes';
+
 export default {
-  name: 'reports-list',
+  name: "reports-list",
+  data: () => ({
+    evaluateRoute: routes.report.evaluate
+  }),
   props: {
     data: {
       type: Object,
       default: () => { }
     }
   },
+  components: { ReportStatusChip }
 }
 </script>
 

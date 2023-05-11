@@ -12,6 +12,7 @@
     "create": "Create",
     "list": "List",
     "save": "Save",
+    "update": "Update",
     "evaluate": "Evaluate"
   },
   "report": {
@@ -22,6 +23,12 @@
     "waiting": "Waiting",
     "status": "Status",
     "actions": "Actions",
-    "priority": "Priority"
+    "priority": "Priority",
+    "created": "Created",
+    "reviewing": "Reviewing",
+    "reviewed": "Reviewed",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High"
   }
 }

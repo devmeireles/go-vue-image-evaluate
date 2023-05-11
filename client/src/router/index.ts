@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import CreateReport from "@/views/Dashboard/Report/create.vue";
+import FormReport from "@/views/Dashboard/Report/form.vue";
 import ListReport from "@/views/Dashboard/Report/index.vue";
 import DashboardView from "@/views/Dashboard/index.vue";
 
@@ -41,7 +41,12 @@ const router = createRouter({
             {
               path: "create",
               name: "report-create",
-              component: CreateReport
+              component: FormReport
+            },
+            {
+              path: "evaluate/:id",
+              name: "report-evaluate",
+              component: FormReport
             }
           ]
         }
