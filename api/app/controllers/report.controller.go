@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"errors"
+	"strconv"
 
 	"github.com/devmeireles/go-vue-image-evaluate/app/dto"
 	"github.com/devmeireles/go-vue-image-evaluate/app/services"
@@ -100,7 +101,11 @@ func GetReport(c *fiber.Ctx) error {
 // @Success 200 {array} models.Report
 // @Router /report [get]
 func ListReports(c *fiber.Ctx) error {
-	reports, err := services.GetReports()
+
+	status, _ := strconv.Atoi(c.Query("status"))
+	priority, _ := strconv.Atoi(c.Query("priority"))
+
+	reports, err := services.GetReports(status, priority)
 
 	if err != nil {
 		res := utils.ResError(err)

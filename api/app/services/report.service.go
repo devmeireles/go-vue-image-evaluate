@@ -36,12 +36,22 @@ func GetReportByID(id string) (*models.Report, error) {
 	return &report, nil
 }
 
-func GetReports() (*[]models.Report, error) {
+func GetReports(status int, priority int) (*[]models.Report, error) {
 	var err error
 	reports := []models.Report{}
 
-	err = database.DB.Db.Model(&models.Report{}).
-		Order("status ASC").Order("priority DESC").Where("status < 3").Find(&reports).Error
+	query := database.DB.Db.Model(&models.Report{}).
+		Order("status ASC").Order("priority DESC")
+
+	if status != 0 {
+		query = query.Where("status = ?", status)
+	}
+
+	if priority != 0 {
+		query = query.Where("priority = ?", priority)
+	}
+
+	err = query.Find(&reports).Error
 
 	if err != nil {
 		return &[]models.Report{}, err
