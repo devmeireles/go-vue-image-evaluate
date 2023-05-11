@@ -12,6 +12,7 @@ func SaveReport(report *dto.CreateReportDTO) (*models.Report, error) {
 		ID:         uuid.NewV4(),
 		ImageUrl:   report.ImageUrl,
 		ExternalID: report.ExternalID,
+		Priority:   int(*report.Priority),
 	}
 
 	if err := database.DB.Db.Model(&models.Report{}).Create(newReport).Error; err != nil {
@@ -64,12 +65,4 @@ func UpdateReport(report *dto.UpdateReportDTO, id string) (*models.Report, error
 	}
 
 	return updateReport, nil
-
-	// if err := database.DB.Db.Model(&models.Category{}).
-	// 	Where("id = ?", id).
-	// 	Updates(&category).Error; err != nil {
-	// 	return err
-	// }
-
-	// return nil
 }
