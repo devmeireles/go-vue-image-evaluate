@@ -19,6 +19,7 @@
     "axios": "^1.4.0",
     "pinia": "^2.0.14",
     "pinia-plugin-persistedstate": "^3.1.0",
+    "qs": "^6.11.1",
     "roboto-fontface": "*",
     "vue": "^3.2.37",
     "vue-i18n": "^9.1.0",

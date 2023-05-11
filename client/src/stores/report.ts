@@ -1,4 +1,4 @@
-import type { CreateReportDTO, TReport } from "@/types/TReport";
+import type { TReport } from "@/types/TReport";
 import axios from "axios";
 import { defineStore } from "pinia";
 
@@ -32,9 +32,19 @@ export const useReportStore = defineStore({
         console.log(error);
       }
     },
-    async fetchReports() {
+    async fetchReports(filters?: any[]) {
       try {
-        const response = await axios.get("http://localhost:3000/report");
+        let params = {};
+
+        if (filters && filters.length > 0) {
+          filters.map((item) => {
+            Object.assign(params, item);
+          });
+        }
+
+        const response = await axios.get("http://localhost:3000/report", {
+          params
+        });
 
         const { data, status } = response;
 

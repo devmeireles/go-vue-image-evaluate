@@ -29,6 +29,7 @@
     "reviewed": "Reviewed",
     "low": "Low",
     "medium": "Medium",
-    "high": "High"
+    "high": "High",
+    "all": "All"
   }
 }
