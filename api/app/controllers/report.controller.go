@@ -30,6 +30,28 @@ func CreateReport(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(res)
 	}
 
+	evaluateResponse, err := services.CreateEvaluateRequest(data.ImageUrl)
+
+	if err != nil {
+		res := utils.ResError(err)
+		return c.Status(fiber.StatusInternalServerError).JSON(res)
+	}
+
+	var classification = evaluateResponse.ClassificationOutcome
+	var priority int
+
+	switch classification {
+	case "UnsafeContent_HighProbability", "RacyContent":
+		priority = 3
+		break
+	case "SafeContent_ModerateProbability":
+		priority = 2
+	default:
+		priority = 1
+	}
+
+	data.Priority = &priority
+
 	report, err := services.SaveReport(data)
 
 	if err != nil {
