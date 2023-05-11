@@ -7,8 +7,7 @@ import (
 )
 
 type Report struct {
-	ID uuid.UUID `json:"id" gorm:"type:uuid;primary_key;"`
-
+	ID         uuid.UUID `json:"id" gorm:"type:uuid;primary_key;"`
 	ExternalID string    `json:"external_id" gorm:"text; not null;" validate:"required"`
 	ImageUrl   string    `json:"image_url" gorm:"text; not null;" validate:"required"`
 	Status     int       `json:"status" gorm:"int; not null; default: 1"`

@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"errors"
-	"strconv"
 
 	"github.com/devmeireles/go-vue-image-evaluate/app/dto"
 	"github.com/devmeireles/go-vue-image-evaluate/app/services"
@@ -48,16 +47,11 @@ func CreateReport(c *fiber.Ctx) error {
 // @Tags report
 // @Accept  json
 // @Produce  json
-// @Param id path int true "Report ID"
+// @Param id path string true "Report ID"
 // @Success 200 {object} models.Report
 // @Router /report/{id} [get]
 func GetReport(c *fiber.Ctx) error {
-	id, err := strconv.Atoi(c.Params("id"))
-
-	if err != nil {
-		res := utils.ResError(err)
-		return c.Status(fiber.ErrBadRequest.Code).JSON(res)
-	}
+	id := c.Params("id")
 
 	report, err := services.GetReportByID(id)
 
@@ -92,5 +86,49 @@ func ListReports(c *fiber.Ctx) error {
 	}
 
 	res := utils.ResSuccess(reports)
+	return c.Status(fiber.StatusOK).JSON(res)
+}
+
+// UpdateReport godoc
+// @Summary Update report identified by the given id
+// @Description Update the report corresponding to the input id
+// @Tags report
+// @Accept  json
+// @Produce  json
+// @Security ApiKeyAuth
+// @Param id path string true "ID of the report to be updated"
+// @Param report body models.UpdateReportDTO true "Update report"
+// @Success 200 {object} models.UpdateReportDTO
+// @Router /api/report/{id} [put]
+func UpdateReport(c *fiber.Ctx) error {
+	id := c.Params("id")
+	payload := new(dto.UpdateReportDTO)
+	c.BodyParser(payload)
+
+	validateErrors := utils.ValidateStruct(*payload)
+	if validateErrors != nil {
+		res := utils.ResErrorValidation(validateErrors)
+		return c.Status(fiber.StatusBadRequest).JSON(res)
+	}
+
+	_, err := services.GetReportByID(id)
+
+	if err != nil {
+		res := utils.ResError(err)
+
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return c.Status(fiber.StatusNotFound).JSON(res)
+		}
+
+		return c.Status(fiber.StatusInternalServerError).JSON(res)
+	}
+
+	report, err := services.UpdateReport(payload, id)
+	if err != nil {
+		res := utils.ResError(err)
+		return c.Status(fiber.StatusInternalServerError).JSON(res)
+	}
+
+	res := utils.ResSuccess(report)
 	return c.Status(fiber.StatusOK).JSON(res)
 }

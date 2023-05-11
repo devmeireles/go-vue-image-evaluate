@@ -21,12 +21,12 @@ func SaveReport(report *dto.CreateReportDTO) (*models.Report, error) {
 	return newReport, nil
 }
 
-func GetReportByID(id int) (*models.Report, error) {
+func GetReportByID(id string) (*models.Report, error) {
 	var err error
 	report := models.Report{}
 
 	err = database.DB.Db.Model(&models.Report{}).
-		First(&report, id).Error
+		First(&report, "id = ?", id).Error
 
 	if err != nil {
 		return &models.Report{}, err
@@ -40,11 +40,36 @@ func GetReports() (*[]models.Report, error) {
 	reports := []models.Report{}
 
 	err = database.DB.Db.Model(&models.Report{}).
-		Find(&reports).Error
+		Order("status ASC").Order("priority DESC").Where("status < 3").Find(&reports).Error
 
 	if err != nil {
 		return &[]models.Report{}, err
 	}
 
 	return &reports, nil
+}
+
+func UpdateReport(report *dto.UpdateReportDTO, id string) (*models.Report, error) {
+	updateReport := &models.Report{
+		ImageUrl:   report.ImageUrl,
+		ExternalID: report.ExternalID,
+		Status:     report.Status,
+		Priority:   report.Priority,
+	}
+
+	if err := database.DB.Db.Model(&models.Report{}).
+		Where("id = ?", id).
+		Updates(&updateReport).Error; err != nil {
+		return &models.Report{}, err
+	}
+
+	return updateReport, nil
+
+	// if err := database.DB.Db.Model(&models.Category{}).
+	// 	Where("id = ?", id).
+	// 	Updates(&category).Error; err != nil {
+	// 	return err
+	// }
+
+	// return nil
 }

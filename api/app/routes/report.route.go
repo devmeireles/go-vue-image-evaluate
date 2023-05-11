@@ -11,4 +11,5 @@ func ReportRoutes(app *fiber.App) {
 	report.Post("/", controllers.CreateReport)
 	report.Get("/", controllers.ListReports)
 	report.Get("/:id", controllers.GetReport)
+	report.Patch("/:id", controllers.UpdateReport)
 }

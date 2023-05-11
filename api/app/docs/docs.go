@@ -20,6 +20,52 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/api/report/{id}": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Update the report corresponding to the input id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "report"
+                ],
+                "summary": "Update report identified by the given id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID of the report to be updated",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Create report",
+                        "name": "report",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Report"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Report"
+                        }
+                    }
+                }
+            }
+        },
         "/report": {
             "get": {
                 "description": "List all reports",
@@ -96,7 +142,7 @@ const docTemplate = `{
                 "summary": "Get details for a given report id",
                 "parameters": [
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "Report ID",
                         "name": "id",
                         "in": "path",
