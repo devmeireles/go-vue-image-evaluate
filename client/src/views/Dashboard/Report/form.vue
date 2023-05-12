@@ -10,6 +10,8 @@
               :error-messages="v$.formData.external_id.$errors.map(e => e.$message)"
               variant="outlined"
               shaped
+              :readonly="editingMode"
+              :disabled="editingMode"
               required
             ></v-text-field>
           </v-col>
@@ -21,8 +23,11 @@
               :error-messages="v$.formData.image_url.$errors.map(e => e.$message)"
               variant="outlined"
               shaped
+              :readonly="editingMode"
+              :disabled="editingMode"
               required
             ></v-text-field>
+            <v-btn v-if="editingMode" color="primary" class="btn-image" variant="plain" :onclick="() => openImage(formData.image_url)">{{ $t('report.open_image') }}</v-btn>
           </v-col>
         </v-row>
 
@@ -187,6 +192,9 @@ export default defineComponent({
       }
 
       this.isLoading = false;
+    },
+    openImage(imageURL: string) {
+      window.open(imageURL, "_blank");
     }
   },
   validations() {
@@ -199,3 +207,10 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="scss" scoped>
+.btn-image {
+  color: var(--primary);
+  cursor: pointer;
+}
+</style>

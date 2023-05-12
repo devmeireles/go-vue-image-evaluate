@@ -30,6 +30,7 @@
     "low": "Low",
     "medium": "Medium",
     "high": "High",
-    "all": "All"
+    "all": "All",
+    "open_image": "Open Image"
   }
 }
