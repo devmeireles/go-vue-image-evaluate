@@ -27,6 +27,12 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 npm install
 ```
 
+### Create a .env file which must contain the API endpoint as `VITE_API_BASE_URL` entry
+
+```
+mv .env.example .env
+```
+
 ### Compile and Hot-Reload for Development
 
 ```sh
