@@ -1,5 +1,5 @@
 <template>
-  <CustomCard :title="$t('report.title_plural')" :createRoute="createRoute">
+  <CustomCard :title="$t('report.title_plural')" :itemsLength="reportsSize" :createRoute="createRoute">
     <ReportFilters @update-filter="updateFilter" class="mb-8"/>
     <ReportsList :data="reports" />
   </CustomCard>
@@ -31,4 +31,8 @@ onMounted(() => {
 const reports = computed(() => {
   return reportStore.getReports();
 });
+
+const reportsSize = computed(() => {
+  return reportStore.reports.length;
+})
 </script>

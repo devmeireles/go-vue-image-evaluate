@@ -31,6 +31,7 @@
     "medium": "Médio",
     "high": "Alto",
     "all": "Todos",
-    "open_image": "Abrir Imagem"
+    "open_image": "Abrir Imagem",
+    "empty_list": "Não há items a serem exibidos"
   }
 }

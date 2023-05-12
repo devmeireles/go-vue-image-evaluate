@@ -5,7 +5,7 @@
     </v-container>
     <div v-else>
       <v-card-title class="title pt-7 mx-5 d-flex justify-space-between">
-        <div>{{ title }}</div>
+        <div><span>{{ itemsLength }}</span> {{ title }}</div>
         <div v-if="createRoute">
           <v-btn
             color="success"
@@ -35,6 +35,10 @@ export default defineComponent({
   props: {
     title: {
       type: String,
+      default: null
+    },
+    itemsLength: {
+      type: Number,
       default: null
     },
     createRoute: {

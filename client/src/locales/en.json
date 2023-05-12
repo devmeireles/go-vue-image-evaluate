@@ -31,6 +31,7 @@
     "medium": "Medium",
     "high": "High",
     "all": "All",
-    "open_image": "Open Image"
+    "open_image": "Open Image",
+    "empty_list": "There are not items to display"
   }
 }

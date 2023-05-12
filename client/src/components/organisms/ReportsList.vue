@@ -1,55 +1,60 @@
 <template>
-  <v-table>
-    <thead>
-      <tr>
-        <th class="text-left">
-          #
-        </th>
-        <th class="text-left">
-          {{ $t('report.image_url') }}
-        </th>
-        <th class="text-left">
-          {{ $t('report.status') }}
-        </th>
-        <th class="text-left">
-          {{ $t('report.priority') }}
-        </th>
-        <th class="text-left">
-          {{ $t('report.actions') }}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="item in data"
-        :key="item.name"
-      >
-        <td>{{ item.external_id }}</td>
-        <td class="image-url">{{ item.image_url }}</td>
-        <td><report-status-chip item-type="status" :status="item.status"/></td>
-        <td><report-status-chip item-type="priority" :status="item.priority"/></td>
-        <td>
-          <v-btn
-            color="primary"
-            variant="outlined"
-            class="cta-btn"
-            @click="() => $router.push({
-              name: 'report-evaluate',
-              params: {
-                id: item.id
-              }
-            })"
-          >
-            {{ $t('actions.evaluate') }}
-            <v-icon
-              end
-              icon="mdi-open-in-new"
-            ></v-icon>
-          </v-btn>
-        </td>
-      </tr>
-    </tbody>
-  </v-table>
+  <v-container class="ma-2 pa-2">
+    <v-table v-if="data.length > 0">
+      <thead>
+        <tr>
+          <th class="text-left">
+            #
+          </th>
+          <th class="text-left">
+            {{ $t('report.image_url') }}
+          </th>
+          <th class="text-left">
+            {{ $t('report.status') }}
+          </th>
+          <th class="text-left">
+            {{ $t('report.priority') }}
+          </th>
+          <th class="text-left">
+            {{ $t('report.actions') }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="item in data"
+          :key="item.name"
+        >
+          <td>{{ item.external_id }}</td>
+          <td class="image-url">{{ item.image_url }}</td>
+          <td><report-status-chip item-type="status" :status="item.status"/></td>
+          <td><report-status-chip item-type="priority" :status="item.priority"/></td>
+          <td>
+            <v-btn
+              color="primary"
+              variant="outlined"
+              class="cta-btn"
+              @click="() => $router.push({
+                name: 'report-evaluate',
+                params: {
+                  id: item.id
+                }
+              })"
+            >
+              {{ $t('actions.evaluate') }}
+              <v-icon
+                end
+                icon="mdi-open-in-new"
+              ></v-icon>
+            </v-btn>
+          </td>
+        </tr>
+      </tbody>
+    </v-table>
+    <v-container v-else class="d-flex align-center justify-center">
+      <p class="text-h5">{{ $t('report.empty_list') }}</p>
+    </v-container>
+  </v-container>
 </template>
 
 <script lang="ts">
