@@ -22,11 +22,18 @@ This is an API that processes image report requests. Users can submit an image U
 
 ## Installing
 
+Make sure to create a .env file
+```
+mv env.example .env
+```
+
 Build and up the API container with:
 
 ```
 docker-compose up --build
 ```
+
+We use Cloudmersive's image classification service to analyze images. To get started, you can create a free account on https://account.cloudmersive.com/signup. With a free tier account, you can make up to 800 API calls per month, with a maximum file size of 3.5 MB. Once you've created an account, you'll need to generate an API key and add it to the `API_KEY` property in your `.env` file
 
 ## Developing
 
@@ -35,7 +42,7 @@ CompileDaemon enables a seamless development process with live reloading. This m
 Also, you can automatically write Swagger docs using annotations throughout the controllers and models, so make to sure to execute the following command:
 
 ```
-docker exec -it api-web-1 make build-swagger
+docker exec -it image-evaluate-web make build-swagger
 ```
 
 After that you can see the docs built on http://localhost:3000/docs/index.html
