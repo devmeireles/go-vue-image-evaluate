@@ -1,10 +1,12 @@
-import type { TReport } from "@/types/TReport";
+import type { CreateReportDTO, TReport } from "@/types/TReport";
 import axios from "axios";
 import { defineStore } from "pinia";
 
 interface ReportState {
   reports: TReport[];
 }
+
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const useReportStore = defineStore({
   id: "report",
@@ -21,7 +23,7 @@ export const useReportStore = defineStore({
   actions: {
     async fetchReport(id: string) {
       try {
-        const response = await axios.get(`http://localhost:3000/report/${id}`);
+        const response = await axios.get(`${BASE_URL}/report/${id}`);
 
         const { data, status } = response;
 
@@ -42,7 +44,7 @@ export const useReportStore = defineStore({
           });
         }
 
-        const response = await axios.get("http://localhost:3000/report", {
+        const response = await axios.get(`${BASE_URL}/report`, {
           params
         });
 
@@ -60,10 +62,7 @@ export const useReportStore = defineStore({
 
     async saveReport(payload: CreateReportDTO) {
       try {
-        const response = await axios.post(
-          "http://localhost:3000/report",
-          payload
-        );
+        const response = await axios.post(`${BASE_URL}/report`, payload);
 
         const { data, status } = response;
 
@@ -78,7 +77,7 @@ export const useReportStore = defineStore({
     async patchReport(payload: CreateReportDTO) {
       try {
         const response = await axios.patch(
-          `http://localhost:3000/report/${payload.id}`,
+          `${BASE_URL}/report/${payload.id}`,
           payload
         );
 
