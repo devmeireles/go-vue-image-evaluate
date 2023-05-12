@@ -124,8 +124,8 @@ func ListReports(c *fiber.Ctx) error {
 // @Produce  json
 // @Security ApiKeyAuth
 // @Param id path string true "ID of the report to be updated"
-// @Param report body models.UpdateReportDTO true "Update report"
-// @Success 200 {object} models.UpdateReportDTO
+// @Param report body dto.UpdateReportDTO true "Update report"
+// @Success 200 {object} dto.UpdateReportDTO
 // @Router /api/report/{id} [put]
 func UpdateReport(c *fiber.Ctx) error {
 	id := c.Params("id")

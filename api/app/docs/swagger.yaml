@@ -5,6 +5,22 @@ definitions:
         type: string
       image_url:
         type: string
+      priority:
+        type: integer
+    required:
+    - external_id
+    - image_url
+    type: object
+  dto.UpdateReportDTO:
+    properties:
+      external_id:
+        type: string
+      image_url:
+        type: string
+      priority:
+        type: integer
+      status:
+        type: integer
     required:
     - external_id
     - image_url
@@ -48,19 +64,19 @@ paths:
         name: id
         required: true
         type: string
-      - description: Create report
+      - description: Update report
         in: body
         name: report
         required: true
         schema:
-          $ref: '#/definitions/models.Report'
+          $ref: '#/definitions/dto.UpdateReportDTO'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.Report'
+            $ref: '#/definitions/dto.UpdateReportDTO'
       security:
       - ApiKeyAuth: []
       summary: Update report identified by the given id

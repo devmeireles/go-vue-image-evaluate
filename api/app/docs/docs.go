@@ -47,12 +47,12 @@ const docTemplate = `{
                         "required": true
                     },
                     {
-                        "description": "Create report",
+                        "description": "Update report",
                         "name": "report",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Report"
+                            "$ref": "#/definitions/dto.UpdateReportDTO"
                         }
                     }
                 ],
@@ -60,7 +60,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.Report"
+                            "$ref": "#/definitions/dto.UpdateReportDTO"
                         }
                     }
                 }
@@ -173,6 +173,30 @@ const docTemplate = `{
                 },
                 "image_url": {
                     "type": "string"
+                },
+                "priority": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.UpdateReportDTO": {
+            "type": "object",
+            "required": [
+                "external_id",
+                "image_url"
+            ],
+            "properties": {
+                "external_id": {
+                    "type": "string"
+                },
+                "image_url": {
+                    "type": "string"
+                },
+                "priority": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "integer"
                 }
             }
         },
